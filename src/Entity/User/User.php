@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Index(name: 'user_name_username_email_idx', columns: ['meta_key'])]
+#[ORM\Index(name: 'user_name_username_email_idx', columns: ['name', 'username', 'email', 'phone'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use Timestamp;

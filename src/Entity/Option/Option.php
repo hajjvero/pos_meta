@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Entity\Setting;
+namespace App\Entity\Option;
 
-use App\Trait\Timestamp;
+use App\Repository\Option\OptionRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity]
-class Setting
+#[ORM\Entity(repositoryClass: OptionRepository::class)]
+#[ORM\Table(name: 'app_option')]
+#[ORM\Index(name: 'option_key_idx', columns: ['option_key'])]
+class Option
 {
-    use Timestamp;
-
     // ============================================================================
     // Properties
     // ============================================================================
@@ -21,10 +21,10 @@ class Setting
     private ?int $id = null;
 
     #[ORM\Column(length: 200, unique: true)]
-    private ?string $settingKey = null;
+    private ?string $optionKey = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $settingValue = null;
+    private ?string $optionValue = null;
 
     // ============================================================================
     // Getters & Setters
@@ -35,25 +35,25 @@ class Setting
         return $this->id;
     }
 
-    public function getSettingKey(): ?string
+    public function getOptionKey(): ?string
     {
-        return $this->settingKey;
+        return $this->optionKey;
     }
 
-    public function setSettingKey(string $settingKey): static
+    public function setOptionKey(string $optionKey): static
     {
-        $this->settingKey = $settingKey;
+        $this->optionKey = $optionKey;
         return $this;
     }
 
-    public function getSettingValue(): ?string
+    public function getOptionValue(): ?string
     {
-        return $this->settingValue;
+        return $this->optionValue;
     }
 
-    public function setSettingValue(?string $settingValue): static
+    public function setOptionValue(?string $optionValue): static
     {
-        $this->settingValue = $settingValue;
+        $this->optionValue = $optionValue;
         return $this;
     }
 }

@@ -22,8 +22,25 @@ abstract class Meta
     // Getters & Setters
     // ============================================================================
 
-    public function getMetaKey(): ?string { return $this->metaKey; }
-    public function setMetaKey(string $metaKey): self { $this->metaKey = $metaKey; return $this; }
-    public function getMetaValue(): ?string { return $this->metaValue; }
-    public function setMetaValue(?string $metaValue): self { $this->metaValue = $metaValue; return $this; }
+    public function getMetaKey(): ?string
+    {
+        return $this->metaKey;
+    }
+
+    public function setMetaKey(string $metaKey): self
+    {
+        $this->metaKey = $metaKey;
+        return $this;
+    }
+
+    public function getMetaValue(): ?string
+    {
+        return $this->metaValue;
+    }
+
+    public function setMetaValue(?string $metaValue): self
+    {
+        $this->metaValue = $metaValue;
+        return $this;
+    }
 }

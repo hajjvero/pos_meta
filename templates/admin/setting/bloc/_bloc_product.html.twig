@@ -1,0 +1,80 @@
+<div class="tab-pane fade" id="products" role="tabpanel">
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-borderless settings-table">
+                <tbody>
+                <tr>
+                    <th class="settings-label">{{ "Product Features"|trans }}</th>
+                    <td class="settings-input">
+                        {% if has_setting('product_is_enable_reference') %}
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" name="product_is_enable_reference"
+                                       id="product_is_enable_reference" value="true"
+                                       {% if get_setting('product_is_enable_reference') == 'true' %}checked{% endif %}>
+                                <label class="form-check-label" for="product_is_enable_reference">
+                                    {{ "Enable product reference field"|trans }}
+                                </label>
+                            </div>
+                        {% endif %}
+
+                        {% if has_setting('product_is_disable_sku') %}
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" name="product_is_disable_sku"
+                                       id="product_is_disable_sku" value="true"
+                                       {% if get_setting('product_is_disable_sku') == 'true' %}checked{% endif %}>
+                                <label class="form-check-label" for="product_is_disable_sku">
+                                    {{ "Disable SKU field"|trans }}
+                                </label>
+                            </div>
+                        {% endif %}
+
+                        {% if has_setting('product_is_enable_description') %}
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" name="product_is_enable_description"
+                                       id="product_is_enable_description" value="true"
+                                       {% if get_setting('product_is_enable_description') == 'true' %}checked{% endif %}>
+                                <label class="form-check-label" for="product_is_enable_description">
+                                    {{ "Enable product description"|trans }}
+                                </label>
+                            </div>
+                        {% endif %}
+
+                        {% if has_setting('product_is_enable_cost_price') %}
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" name="product_is_enable_cost_price"
+                                       id="product_is_enable_cost_price" value="true"
+                                       {% if get_setting('product_is_enable_cost_price') == 'true' %}checked{% endif %}>
+                                <label class="form-check-label" for="product_is_enable_cost_price">
+                                    {{ "Enable cost price tracking"|trans }}
+                                </label>
+                            </div>
+                        {% endif %}
+
+                        {% if has_setting('product_enable_categories') %}
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" name="product_enable_categories"
+                                       id="product_enable_categories" value="true"
+                                       {% if get_setting('product_enable_categories') == 'true' %}checked{% endif %}>
+                                <label class="form-check-label" for="product_enable_categories">
+                                    {{ "Enable product categories"|trans }}
+                                </label>
+                            </div>
+                        {% endif %}
+
+                        {% if has_setting('product_enable_images') %}
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="product_enable_images"
+                                       id="product_enable_images" value="true"
+                                       {% if get_setting('product_enable_images') == 'true' %}checked{% endif %}>
+                                <label class="form-check-label" for="product_enable_images">
+                                    {{ "Enable product images"|trans }}
+                                </label>
+                            </div>
+                        {% endif %}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
