@@ -11,6 +11,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CustomerRepository::class)]
+#[ORM\Table(name: 'app_customer')]
 #[ORM\Index(name: 'customer_name_email_phone_idx', columns: ['name', 'email', 'phone'])]
 class Customer extends Person
 {
@@ -173,5 +174,14 @@ class Customer extends Person
         }
 
         return $this;
+    }
+
+    // ============================================================================
+    // Implemented methods
+    // ============================================================================
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 }

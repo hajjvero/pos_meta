@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
+#[ORM\Table(name: 'app_product')]
 #[ORM\Index(name: 'product_name_sku_idx', columns: ['name', 'sku'])]
 class Product
 {

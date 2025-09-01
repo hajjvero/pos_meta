@@ -10,27 +10,27 @@
                         </th>
                         <td class="settings-input">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="date_format" value="Y-m-d"
+                                <input class="form-check-input" type="radio" name="date_format" value="YYYY-MM-dd"
                                        id="date_format_1"
-                                       {% if get_setting('date_format') == 'Y-m-d' %}checked{% endif %}>
+                                       {% if get_setting('date_format') == 'YYYY-MM-dd' %}checked{% endif %}>
                                 <label class="form-check-label" for="date_format_1">
                                     <span class="format-example">{{ "now"|date('Y-m-d') }}</span>
                                     <code>Y-m-d</code>
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="date_format" value="d/m/Y"
+                                <input class="form-check-input" type="radio" name="date_format" value="dd/MM/YYYY"
                                        id="date_format_2"
-                                       {% if get_setting('date_format') == 'd/m/Y' %}checked{% endif %}>
+                                       {% if get_setting('date_format') == 'dd/MM/YYYY' %}checked{% endif %}>
                                 <label class="form-check-label" for="date_format_2">
                                     <span class="format-example">{{ "now"|date('d/m/Y') }}</span>
                                     <code>d/m/Y</code>
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="date_format" value="m/d/Y"
+                                <input class="form-check-input" type="radio" name="date_format" value="MM/dd/YYYY"
                                        id="date_format_3"
-                                       {% if get_setting('date_format') == 'm/d/Y' %}checked{% endif %}>
+                                       {% if get_setting('date_format') == 'MM/dd/YYYY' %}checked{% endif %}>
                                 <label class="form-check-label" for="date_format_3">
                                     <span class="format-example">{{ "now"|date('m/d/Y') }}</span>
                                     <code>m/d/Y</code>
@@ -48,21 +48,39 @@
                         </th>
                         <td class="settings-input">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="time_format" value="H:i:s"
+                                <input class="form-check-input" type="radio" name="time_format" value="HH:mm:ss"
                                        id="time_format_1"
-                                       {% if get_setting('time_format') == 'H:i:s' %}checked{% endif %}>
+                                       {% if get_setting('time_format') == 'HH:mm:ss' %}checked{% endif %}>
                                 <label class="form-check-label" for="time_format_1">
                                     <span class="format-example">{{ "now"|date('H:i:s') }}</span>
                                     <code>H:i:s</code> (24-hour format)
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="time_format" value="h:i:s A"
+                                <input class="form-check-input" type="radio" name="time_format" value="HH:mm"
                                        id="time_format_2"
-                                       {% if get_setting('time_format') == 'h:i:s A' %}checked{% endif %}>
+                                       {% if get_setting('time_format') == 'HH:mm' %}checked{% endif %}>
                                 <label class="form-check-label" for="time_format_2">
-                                    <span class="format-example">{{ "now"|date('h:i:s A') }}</span>
-                                    <code>h:i:s A</code> (12-hour format)
+                                    <span class="format-example">{{ "now"|date('H:i') }}</span>
+                                    <code>H:i</code>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="time_format" value="hh:mm:ss"
+                                       id="time_format_3"
+                                       {% if get_setting('time_format') == 'hh:mm:ss' %}checked{% endif %}>
+                                <label class="form-check-label" for="time_format_3">
+                                    <span class="format-example">{{ "now"|date('h:i:s') }}</span>
+                                    <code>h:i:s</code> (12-hour format)
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="time_format" value="hh:mm"
+                                       id="time_format_4"
+                                       {% if get_setting('time_format') == 'hh:mm' %}checked{% endif %}>
+                                <label class="form-check-label" for="time_format_4">
+                                    <span class="format-example">{{ "now"|date('h:i') }}</span>
+                                    <code>h:i</code>
                                 </label>
                             </div>
                         </td>

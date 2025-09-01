@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
+#[ORM\Table(name: 'app_product_meta')]
 #[ORM\Index(name: 'product_meta_key_idx', columns: ['meta_key'])]
 class ProductMeta extends Meta
 {

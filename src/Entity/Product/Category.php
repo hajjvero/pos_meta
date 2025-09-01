@@ -10,6 +10,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
+#[ORM\Table(name: 'app_category')]
 #[ORM\Index(name: 'category_name_idx', columns: ['name'])]
 class Category
 {

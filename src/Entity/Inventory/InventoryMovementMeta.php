@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
+#[ORM\Table(name: 'app_inventory_movement_meta')]
 #[ORM\Index(name: 'inventory_movement_meta_key_idx', columns: ['inventory_movement_id', 'meta_key'])]
 class InventoryMovementMeta extends Meta
 {

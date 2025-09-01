@@ -2,12 +2,17 @@
 
 namespace App\Controller\Admin;
 
+use App\Controller\Admin\Customer\CustomerCrudController;
+use App\Controller\Admin\Order\OrderCrudController;
 use App\Dto\Setting\Setting;
 use App\Entity\Customer\Customer;
 use App\Entity\Order\Order;
 use App\Entity\Product\Product;
 use App\Service\Setting\SettingService;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -66,6 +71,13 @@ class DashboardController extends AbstractDashboardController
             ;
     }
 
+    public function configureAssets(): Assets
+    {
+        return parent::configureAssets()
+            ->addWebpackEncoreEntry('app')
+            ;
+    }
+
     public function configureUserMenu(UserInterface $user): UserMenu
     {
         return parent::configureUserMenu($user)
@@ -87,12 +99,13 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::linkToCrud(t('Create'), 'fas fa-plus', Customer::class)
                     ->setAction(Crud::PAGE_NEW),
             ]);
-
-//        yield  MenuItem::section('Sales');
-//        yield MenuItem::linkToCrud('Orders', 'fas fa-shopping-cart', Order::class);
-//
-//        yield  MenuItem::section('Inventory');
-//        yield MenuItem::linkToCrud('Products', 'fas fa-box', Product::class);
+        yield  MenuItem::section(t('Sales'));
+        yield MenuItem::subMenu(t('Orders'), 'fas fa-shopping-cart')
+            ->setSubItems([
+                MenuItem::linkToCrud(t('List'), 'fas fa-list', Order::class),
+                MenuItem::linkToCrud(t('Create'), 'fas fa-plus', Order::class)
+                    ->setAction(Crud::PAGE_NEW),
+            ]);
 
 
         yield  MenuItem::section(t('Settings'));
@@ -104,8 +117,43 @@ class DashboardController extends AbstractDashboardController
         return parent::configureCrud()
             ->setPaginatorPageSize(30)
             ->setTimezone($this->setting->get('time_zone'))
-            ->setDateTimeFormat('Y-m-d H:i:s')
-            //sprintf('%s %s', $this->setting->get('date_format'), $this->setting->get('time_format'))
+            ->setDateTimeFormat(sprintf('%s %s', $this->setting->get('date_format'), $this->setting->get('time_format')))
+            ->hideNullValues()
+            ;
+    }
+
+    public function configureActions(): Actions
+    {
+        return parent::configureActions()
+            ->add(Crud::PAGE_INDEX, Action::DETAIL)
+            ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
+                return $action
+                    ->setIcon('fa fa-plus')
+                    ;
+            })
+            ->update(Crud::PAGE_INDEX, Action::DETAIL, function (Action $action) {
+                return $action
+                    ->setIcon('fa fa-eye')
+                    ->addCssClass('text-info')
+                    ;
+            })
+            ->update(Crud::PAGE_INDEX, Action::EDIT, function (Action $action) {
+                return $action
+                    ->setIcon('fa fa-pencil-alt')
+                    ->addCssClass('text-primary')
+                    ;
+            })
+            ->update(Crud::PAGE_INDEX, Action::DELETE, function (Action $action) {
+                return $action
+                    ->setIcon('fa fa-trash-alt')
+                    ->addCssClass('text-danger')
+                    ;
+            })
+            ->update(Crud::PAGE_INDEX, Action::BATCH_DELETE, function (Action $action) {
+                return $action
+                    ->setIcon('fa fa-trash-alt')
+                    ;
+            })
             ;
     }
 }

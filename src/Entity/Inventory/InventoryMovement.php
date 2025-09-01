@@ -11,6 +11,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
+#[ORM\Table(name: 'app_inventory_movement')]
 #[ORM\Index(name: 'inventory_movement_type_idx', columns: ['type'])]
 class InventoryMovement
 {

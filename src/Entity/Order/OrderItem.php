@@ -11,6 +11,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OrderItemRepository::class)]
+#[ORM\Table(name: 'app_order_item')]
 #[ORM\Index(name: 'order_item_name_idx', columns: ['name'])]
 class OrderItem
 {
