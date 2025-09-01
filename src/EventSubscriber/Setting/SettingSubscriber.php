@@ -20,7 +20,7 @@ class SettingSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::REQUEST => ['onKernelRequest', 1024],
+            KernelEvents::REQUEST => ['onKernelRequest', 0],
         ];
     }
 
@@ -34,7 +34,10 @@ class SettingSubscriber implements EventSubscriberInterface
         }
 
         // Preload settings into cache on first request
-        $this->settingService->getSetting();
+        $setting = $this->settingService->getSetting();
         $this->settingsLoaded = true;
+
+        // update default locale
+        $event->getRequest()->setLocale($setting->get('language'));
     }
 }
