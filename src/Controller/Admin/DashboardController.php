@@ -2,12 +2,9 @@
 
 namespace App\Controller\Admin;
 
-use App\Controller\Admin\Customer\CustomerCrudController;
-use App\Controller\Admin\Order\OrderCrudController;
 use App\Dto\Setting\Setting;
 use App\Entity\Customer\Customer;
 use App\Entity\Order\Order;
-use App\Entity\Product\Product;
 use App\Service\Setting\SettingService;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;

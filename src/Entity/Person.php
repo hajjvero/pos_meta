@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use App\Trait\Timestamp;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\MappedSuperclass]
+#[UniqueEntity(fields: 'email')]
+#[UniqueEntity(fields: 'phone')]
 abstract class Person
 {
     use Timestamp;
@@ -15,17 +18,15 @@ abstract class Person
     // Properties
     // ============================================================================
 
-    #[ORM\Column(length: 100)]
     #[Assert\NotBlank]
+    #[ORM\Column(length: 100)]
     protected ?string $name = null;
 
-    #[ORM\Column(length: 180, unique: true, nullable: true)]
     #[Assert\Email]
-    #[Assert\Unique]
+    #[ORM\Column(length: 180, unique: true, nullable: true)]
     protected ?string $email = null;
 
     #[ORM\Column(length: 30, unique: true, nullable: true)]
-    #[Assert\Unique]
     protected ?string $phone = null;
 
     // ============================================================================

@@ -74,7 +74,7 @@ class Customer extends Person
             $meta = new CustomerMeta();
             $meta->setCustomer($this);
             $meta->setMetaKey($key);
-            $this->customerMetas->add($meta);
+            $this->addCustomerMeta($meta);
         }
 
         $meta->setMetaValue($value);

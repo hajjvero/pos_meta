@@ -3,9 +3,9 @@
 namespace App\Controller\Admin\Customer;
 
 use App\Entity\Customer\Customer;
-use App\Twig\Extension\Setting\FinancialExtension;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
@@ -14,7 +14,7 @@ use function Symfony\Component\Translation\t;
 
 class CustomerCrudController extends AbstractCrudController
 {
-    public function __construct(private readonly FinancialExtension $financialExtension)
+    public function __construct()
     {
     }
 
@@ -28,32 +28,38 @@ class CustomerCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular(t('Customer'))
             ->setEntityLabelInPlural(t('Customers'))
-            ->overrideTemplate('crud/detail', 'admin/customer/detail.html.twig')
-            ;
+            ->overrideTemplate('crud/detail', 'admin/customer/detail.html.twig');
     }
 
     public function configureFields(string $pageName): iterable
     {
         // Basic customer information
-        yield TextField::new('name')
-            ->setLabel(t('Name'));
+        yield TextField::new('name', t('Name'));
 
-        yield EmailField::new('email')
-            ->setLabel(t('Email'));
+        yield EmailField::new('email', t('Email'));
 
-        yield TelephoneField::new('phone')
-            ->setLabel(t('Phone'));
+        yield TelephoneField::new('phone', t('Phone'));
 
-        yield TextField::new('type')
-            ->setLabel(t('Type'));
+        yield ChoiceField::new('type', t('Type'))
+            ->renderAsBadges([
+                'regular' => 'success',
+                'company' => 'primary',
+                'association' => 'info',
+                'government' => 'warning',
+                'other' => 'secondary'
+            ])->setTranslatableChoices([
+                'regular' => t('Regular'),
+                'company' => t('Company'),
+                'association' => t('Association'),
+                'government' => t('Government'),
+                'other' => t('Other')
+            ]);
 
         // Timestamps
-        yield DateTimeField::new('createdAt')
-            ->hideOnForm()
-            ->setLabel(t('Created At'));
+        yield DateTimeField::new('createdAt', t('Created At'))
+            ->hideOnForm();
 
-        yield DateTimeField::new('updatedAt')
-            ->onlyOnDetail()
-            ->setLabel(t('Last Updated At'));
+        yield DateTimeField::new('updatedAt', t('Last Updated At'))
+            ->onlyOnDetail();
     }
 }
