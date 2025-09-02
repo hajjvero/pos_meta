@@ -23,9 +23,9 @@ class OptionFixtures extends Fixture
     {
         return [
             // General Settings
-            'date_format' => 'Y-m-d',
-            'time_format' => 'H:i:s',
-            'time_zone' => 'UTC',
+            'date_format' => 'YYYY-MM-dd',
+            'time_format' => 'HH:mm',
+            'time_zone' => 'Africa/Casablanca',
             'language' => 'en',
 
             // Company Settings
@@ -33,7 +33,7 @@ class OptionFixtures extends Fixture
             'company_email' => '',
             'company_phone' => '',
             'company_fax' => '',
-            'company_address' => '123 Main St',
+            'company_address' => '',
             'company_logo' => '',
             'company_logo_dark' => '',
 

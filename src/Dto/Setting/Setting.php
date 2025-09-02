@@ -40,10 +40,10 @@ class Setting
         return $value;
     }
 
-    public function get(string $key): mixed
+    public function get(string $key, mixed $default = null): mixed
     {
         $property = $this->convertKeyToProperty($key);
-        return $this->{$property} ?? null;
+        return $this->{$property} ?? $default;
     }
 
     public function has(string $key): bool

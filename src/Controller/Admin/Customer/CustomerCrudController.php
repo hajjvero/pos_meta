@@ -3,18 +3,11 @@
 namespace App\Controller\Admin\Customer;
 
 use App\Entity\Customer\Customer;
-use App\Entity\Order\Order;
 use App\Twig\Extension\Setting\FinancialExtension;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use function Symfony\Component\Translation\t;
@@ -35,6 +28,7 @@ class CustomerCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular(t('Customer'))
             ->setEntityLabelInPlural(t('Customers'))
+            ->overrideTemplate('crud/detail', 'admin/customer/detail.html.twig')
             ;
     }
 

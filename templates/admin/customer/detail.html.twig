@@ -1,0 +1,257 @@
+{% extends '@!EasyAdmin/crud/detail.html.twig' %}
+
+{% block content_title "Customer details"|trans %}
+
+{% block main %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    {{ ux_icon('tabler:user') }}
+                    Customer Information
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group mb-3">
+                            <label class="form-label fw-bold">Name</label>
+                            <div class="form-control-plaintext">{{ entity.instance.name ?? 'N/A' }}</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group mb-3">
+                            <label class="form-label fw-bold">Type</label>
+                            <div class="form-control-plaintext">
+                                {% if entity.instance.type %}
+                                    <span class="badge bg-primary">{{ entity.instance.type }}</span>
+                                {% else %}
+                                    <span class="text-muted">N/A</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group mb-3">
+                            <label class="form-label fw-bold">Email</label>
+                            <div class="form-control-plaintext">
+                                {% if entity.instance.email %}
+                                    <a href="mailto:{{ entity.instance.email }}">{{ entity.instance.email }}</a>
+                                {% else %}
+                                    <span class="text-muted">N/A</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group mb-3">
+                            <label class="form-label fw-bold">Phone</label>
+                            <div class="form-control-plaintext">
+                                {% if entity.instance.phone %}
+                                    <a href="tel:{{ entity.instance.phone }}">{{ entity.instance.phone }}</a>
+                                {% else %}
+                                    <span class="text-muted">N/A</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group mb-3">
+                            <label class="form-label fw-bold">Created At</label>
+                            <div class="form-control-plaintext">
+                                {% if entity.instance.createdAt %}
+                                    {{ entity.instance.createdAt|date('Y-m-d H:i:s') }}
+                                {% else %}
+                                    <span class="text-muted">N/A</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group mb-3">
+                            <label class="form-label fw-bold">Updated At</label>
+                            <div class="form-control-plaintext">
+                                {% if entity.instance.updatedAt %}
+                                    {{ entity.instance.updatedAt|date('Y-m-d H:i:s') }}
+                                {% else %}
+                                    <span class="text-muted">N/A</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if entity.instance.customerMetas|length > 0 %}
+        <div class="card mt-4">
+            <div class="card-header">
+                <h3 class="card-title">
+                    {{ ux_icon('tabler:tag') }}
+                    Custom Metadata
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Key</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for meta in entity.instance.customerMetas %}
+                            <tr>
+                                <td><strong>{{ meta.metaKey }}</strong></td>
+                                <td>{{ meta.metaValue }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if entity.instance.orders|length > 0 %}
+        <div class="card mt-4">
+            <div class="card-header">
+                <h3 class="card-title">
+                    {{ ux_icon('tabler:shopping-cart') }}
+                    Orders ({{ entity.instance.orders|length }})
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Status</th>
+                                <th>Total</th>
+                                <th>Created</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in entity.instance.orders %}
+                            <tr>
+                                <td>#{{ order.id }}</td>
+                                <td>
+                                    {% if order.status %}
+                                        <span class="badge bg-info">{{ order.status }}</span>
+                                    {% else %}
+                                        <span class="text-muted">N/A</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if order.total is defined %}
+                                        {{ order.total|number_format(2) }}
+                                    {% else %}
+                                        <span class="text-muted">N/A</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if order.createdAt %}
+                                        {{ order.createdAt|date('Y-m-d H:i') }}
+                                    {% else %}
+                                        <span class="text-muted">N/A</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{{ ea_url().setController('App\\Controller\\Admin\\Order\\OrderCrudController').setAction('detail').setEntityId(order.id) }}" class="btn btn-sm btn-outline-primary">
+                                        {{ ux_icon('tabler:eye') }} View
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    {{ ux_icon('tabler:chart-bar') }}
+                    Customer Statistics
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-12">
+                        <div class="border-bottom pb-3 mb-3">
+                            <h4 class="mb-1">{{ entity.instance.orders|length }}</h4>
+                            <small class="text-muted">Total Orders</small>
+                        </div>
+                    </div>
+                </div>
+
+                {% if entity.instance.customerMetas|length > 0 %}
+                <div class="row text-center">
+                    <div class="col-12">
+                        <div class="border-bottom pb-3 mb-3">
+                            <h4 class="mb-1">{{ entity.instance.customerMetas|length }}</h4>
+                            <small class="text-muted">Metadata Fields</small>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="row text-center">
+                    <div class="col-12">
+                        <div class="pb-3 mb-3">
+                            <h4 class="mb-1">
+                                {% if entity.instance.createdAt %}
+                                    {{ (date().diff(entity.instance.createdAt).days) }}
+                                {% else %}
+                                    0
+                                {% endif %}
+                            </h4>
+                            <small class="text-muted">Days as Customer</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header">
+                <h3 class="card-title">
+                    {{ ux_icon('tabler:settings') }}
+                    Quick Actions
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a href="{{ ea_url().setController('App\\Controller\\Admin\\Customer\\CustomerCrudController').setAction('edit').setEntityId(entity.instance.id) }}" class="btn btn-primary">
+                        {{ ux_icon('tabler:edit') }} Edit Customer
+                    </a>
+                    {% if entity.instance.email %}
+                    <a href="mailto:{{ entity.instance.email }}" class="btn btn-outline-secondary">
+                        {{ ux_icon('tabler:mail') }} Send Email
+                    </a>
+                    {% endif %}
+                    {% if entity.instance.phone %}
+                    <a href="tel:{{ entity.instance.phone }}" class="btn btn-outline-secondary">
+                        {{ ux_icon('tabler:phone') }} Call Customer
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

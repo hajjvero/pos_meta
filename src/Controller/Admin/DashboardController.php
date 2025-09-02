@@ -65,7 +65,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle($this->setting->get('company_name'))
+            ->setTitle($this->setting->get('company_name', 'Dashboard'))
             ->setFaviconPath('favicon.svg')
             ->setDefaultColorScheme(ColorScheme::LIGHT)
             ;
@@ -83,14 +83,14 @@ class DashboardController extends AbstractDashboardController
         return parent::configureUserMenu($user)
             ->addMenuItems([
                 MenuItem::linkToRoute(t('Settings'), 'fas fa-cog', 'admin_setting'),
-                MenuItem::linkToLogout(t('Logout'), 'fa fa-sign-out'),
+                MenuItem::linkToLogout(t('Logout'), 'fas fa-sign-out-alt'),
             ])
             ;
     }
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linkToDashboard(t('Dashboard'), 'fas fa-home');
 
         yield  MenuItem::section(t('CRM'));
         yield MenuItem::subMenu(t('Customers'), 'fas fa-users')
@@ -128,30 +128,30 @@ class DashboardController extends AbstractDashboardController
             ->add(Crud::PAGE_INDEX, Action::DETAIL)
             ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
                 return $action
-                    ->setIcon('fa fa-plus')
+                    ->setIcon('fas fa-plus')
                     ;
             })
             ->update(Crud::PAGE_INDEX, Action::DETAIL, function (Action $action) {
                 return $action
-                    ->setIcon('fa fa-eye')
+                    ->setIcon('fas fa-eye')
                     ->addCssClass('text-info')
                     ;
             })
             ->update(Crud::PAGE_INDEX, Action::EDIT, function (Action $action) {
                 return $action
-                    ->setIcon('fa fa-pencil-alt')
+                    ->setIcon('fas fa-edit')
                     ->addCssClass('text-primary')
                     ;
             })
             ->update(Crud::PAGE_INDEX, Action::DELETE, function (Action $action) {
                 return $action
-                    ->setIcon('fa fa-trash-alt')
+                    ->setIcon('fas fa-trash')
                     ->addCssClass('text-danger')
                     ;
             })
             ->update(Crud::PAGE_INDEX, Action::BATCH_DELETE, function (Action $action) {
                 return $action
-                    ->setIcon('fa fa-trash-alt')
+                    ->setIcon('fas fa-trash')
                     ;
             })
             ;
