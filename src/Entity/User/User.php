@@ -3,12 +3,13 @@
 namespace App\Entity\User;
 
 use App\Entity\Order\Order;
+use App\Entity\Person;
 use App\Repository\User\UserRepository;
-use App\Trait\Timestamp;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -16,10 +17,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: 'app_user')]
 #[ORM\Index(name: 'user_name_username_email_idx', columns: ['name', 'username', 'email', 'phone'])]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+#[UniqueEntity(fields: 'username')]
+class User extends Person implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    use Timestamp;
-
     // ============================================================================
     // Properties
     // ============================================================================
@@ -29,31 +29,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::BIGINT)]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
-    #[Assert\NotBlank]
-    private ?string $name = null;
-
+    #[Assert\NotBlank(message: 'Username cannot be blank')]
+    #[Assert\Length(
+        min: 3,
+        max: 30,
+        minMessage: 'Username must be at least {{ limit }} characters long',
+        maxMessage: 'Username cannot be longer than {{ limit }} characters'
+    )]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z0-9_.-]+$/',
+        message: 'Username can only contain letters, numbers, underscores, dots, and hyphens'
+    )]
     #[ORM\Column(length: 180, unique:  true)]
-    #[Assert\Unique]
     private ?string $username = null;
-
-    #[ORM\Column(length: 180, unique: true)]
-    #[Assert\Unique]
-    private ?string $email = null;
-
-    #[ORM\Column(length: 30, unique: true, nullable: true)]
-    #[Assert\Unique]
-    private ?string $phone = null;
 
     /**
      * @var ?string The hashed password
      */
+    #[Assert\Length(
+        min: 8,
+        minMessage: 'Password must be at least {{ limit }} characters long'
+    )]
+    #[Assert\Regex(
+        pattern: '/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/',
+        message: 'Password must contain at least one lowercase letter, one uppercase letter, and one number'
+    )]
+    #[Assert\NotCompromisedPassword(message: 'This password has been leaked in a data breach, please choose a different one')]
     #[ORM\Column]
     private ?string $password = null;
 
     /**
      * @var list<string> The user roles
      */
+    #[Assert\Unique]
     #[ORM\Column]
     private array $roles = [];
 
@@ -137,18 +145,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): static
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     public function getUsername(): ?string
     {
         return $this->username;
@@ -157,18 +153,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUsername(string $username): static
     {
         $this->username = $username;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): static
-    {
-        $this->email = $email;
 
         return $this;
     }

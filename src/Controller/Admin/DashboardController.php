@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Dto\Setting\Setting;
 use App\Entity\Customer\Customer;
 use App\Entity\Order\Order;
+use App\Entity\User\User;
 use App\Service\Setting\SettingService;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -96,6 +97,13 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::linkToCrud(t('Create'), 'fas fa-plus', Customer::class)
                     ->setAction(Crud::PAGE_NEW),
             ]);
+        yield MenuItem::subMenu(t('Users'), 'fas fa-user')
+            ->setSubItems([
+                MenuItem::linkToCrud(t('List'), 'fas fa-list', User::class),
+                MenuItem::linkToCrud(t('Create'), 'fas fa-plus', User::class)
+                    ->setAction(Crud::PAGE_NEW),
+            ]);
+
         yield  MenuItem::section(t('Sales'));
         yield MenuItem::subMenu(t('Orders'), 'fas fa-shopping-cart')
             ->setSubItems([
