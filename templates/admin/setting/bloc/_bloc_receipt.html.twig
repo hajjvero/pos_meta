@@ -1,80 +1,76 @@
-<div class="tab-pane fade" id="receipts" role="tabpanel">
-    <div class="card">
-        <div class="card-body">
-            <table class="table table-borderless settings-table">
-                <tbody>
-                {% if has_setting('receipt_header_text') %}
-                    <tr>
-                        <th class="settings-label">
-                            <label for="receipt_header_text">{{ "Receipt Header"|trans }}</label>
-                        </th>
-                        <td class="settings-input">
+<div id="receipts" class="tab-pane field-form_tab" role="tabpanel">
+    <table class="table table-borderless settings-table">
+        <tbody>
+        {% if has_setting('receipt_header_text') %}
+            <tr>
+                <th class="settings-label">
+                    <label for="receipt_header_text">{{ "Receipt Header"|trans }}</label>
+                </th>
+                <td class="settings-input">
                             <textarea name="receipt_header_text" id="receipt_header_text" rows="3"
                                       class="form-control">{{ get_setting('receipt_header_text') ?? 'Thank you for your purchase!' }}</textarea>
-                            <div class="form-text">{{ "Text to display at the top of receipts."|trans }}</div>
-                        </td>
-                    </tr>
-                {% endif %}
+                    <div class="form-text">{{ "Text to display at the top of receipts."|trans }}</div>
+                </td>
+            </tr>
+        {% endif %}
 
-                {% if has_setting('receipt_footer_text') %}
-                    <tr>
-                        <th class="settings-label">
-                            <label for="receipt_footer_text">{{ "Receipt Footer"|trans }}</label>
-                        </th>
-                        <td class="settings-input">
+        {% if has_setting('receipt_footer_text') %}
+            <tr>
+                <th class="settings-label">
+                    <label for="receipt_footer_text">{{ "Receipt Footer"|trans }}</label>
+                </th>
+                <td class="settings-input">
                             <textarea name="receipt_footer_text" id="receipt_footer_text" rows="3"
                                       class="form-control">{{ get_setting('receipt_footer_text') ?? 'Please come again!' }}</textarea>
-                            <div class="form-text">{{ "Text to display at the bottom of receipts."|trans }}</div>
-                        </td>
-                    </tr>
-                {% endif %}
+                    <div class="form-text">{{ "Text to display at the bottom of receipts."|trans }}</div>
+                </td>
+            </tr>
+        {% endif %}
 
-                {% if has_setting('receipt_paper_size') %}
-                    <tr>
-                        <th class="settings-label">
-                            <label for="receipt_paper_size">{{ "Receipt Paper Size"|trans }}</label>
-                        </th>
-                        <td class="settings-input">
-                            <select name="receipt_paper_size" id="receipt_paper_size" class="form-select"
-                                    style="max-width: 200px;">
-                                <option value="58mm"
-                                        {% if get_setting('receipt_paper_size') == '58mm' %}selected{% endif %}>58mm
-                                </option>
-                                <option value="80mm"
-                                        {% if get_setting('receipt_paper_size') == '80mm' %}selected{% endif %}>80mm
-                                </option>
-                            </select>
-                            <div class="form-text">{{ "The paper size for receipt printing."|trans }}</div>
-                        </td>
-                    </tr>
-                {% endif %}
+        {% if has_setting('receipt_paper_size') %}
+            <tr>
+                <th class="settings-label">
+                    <label for="receipt_paper_size">{{ "Receipt Paper Size"|trans }}</label>
+                </th>
+                <td class="settings-input">
+                    <select name="receipt_paper_size" id="receipt_paper_size" class="form-select"
+                            style="max-width: 200px;">
+                        <option value="58mm"
+                                {% if get_setting('receipt_paper_size') == '58mm' %}selected{% endif %}>58mm
+                        </option>
+                        <option value="80mm"
+                                {% if get_setting('receipt_paper_size') == '80mm' %}selected{% endif %}>80mm
+                        </option>
+                    </select>
+                    <div class="form-text">{{ "The paper size for receipt printing."|trans }}</div>
+                </td>
+            </tr>
+        {% endif %}
 
-                {% if has_setting('receipt_show_logo') %}
-                    <tr>
-                        <th class="settings-label">{{ "Receipt Display Options"|trans }}</th>
-                        <td class="settings-input">
-                            <div class="form-check form-switch mb-2">
-                                <input class="form-check-input" type="checkbox" name="receipt_show_logo"
-                                       id="receipt_show_logo" value="true"
-                                       {% if get_setting('receipt_show_logo') == 'true' %}checked{% endif %}>
-                                <label class="form-check-label" for="receipt_show_logo">
-                                    {{ "Show company logo on receipts"|trans }}
-                                </label>
-                            </div>
+        {% if has_setting('receipt_show_logo') %}
+            <tr>
+                <th class="settings-label">{{ "Receipt Display Options"|trans }}</th>
+                <td class="settings-input">
+                    <div class="form-check form-switch mb-2">
+                        <input class="form-check-input" type="checkbox" name="receipt_show_logo"
+                               id="receipt_show_logo" value="true"
+                               {% if get_setting('receipt_show_logo') == 'true' %}checked{% endif %}>
+                        <label class="form-check-label" for="receipt_show_logo">
+                            {{ "Show company logo on receipts"|trans }}
+                        </label>
+                    </div>
 
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" name="receipt_show_barcode"
-                                       id="receipt_show_barcode" value="true"
-                                       {% if get_setting('receipt_show_barcode') == 'true' %}checked{% endif %}>
-                                <label class="form-check-label" for="receipt_show_barcode">
-                                    {{ "Show barcode on receipts"|trans }}
-                                </label>
-                            </div>
-                        </td>
-                    </tr>
-                {% endif %}
-                </tbody>
-            </table>
-        </div>
-    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="receipt_show_barcode"
+                               id="receipt_show_barcode" value="true"
+                               {% if get_setting('receipt_show_barcode') == 'true' %}checked{% endif %}>
+                        <label class="form-check-label" for="receipt_show_barcode">
+                            {{ "Show barcode on receipts"|trans }}
+                        </label>
+                    </div>
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
 </div>

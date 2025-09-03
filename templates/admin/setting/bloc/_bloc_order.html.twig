@@ -1,74 +1,70 @@
-<div class="tab-pane fade" id="orders" role="tabpanel">
-    <div class="card">
-        <div class="card-body">
-            <table class="table table-borderless settings-table">
-                <tbody>
-                {% if has_setting('order_code_format') %}
-                    <tr>
-                        <th class="settings-label">
-                            <label for="order_code_format">{{ "Order Code Format"|trans }}</label>
-                        </th>
-                        <td class="settings-input">
-                            <input name="order_code_format" type="text" id="order_code_format"
-                                   value="{{ get_setting('order_code_format') ?? 'ORD-{YYYY}-{MM}-{DD}-{ID}' }}"
-                                   class="form-control">
-                            <div
-                                class="form-text">{{ "Format for generating order codes. Use {YYYY}, {MM}, {DD}, {ID} as placeholders."|trans }}</div>
-                        </td>
-                    </tr>
+<div id="orders" class="tab-pane field-form_tab" role="tabpanel">
+    <table class="table table-borderless settings-table">
+        <tbody>
+        {% if has_setting('order_code_format') %}
+            <tr>
+                <th class="settings-label">
+                    <label for="order_code_format">{{ "Order Code Format"|trans }}</label>
+                </th>
+                <td class="settings-input">
+                    <input name="order_code_format" type="text" id="order_code_format"
+                           value="{{ get_setting('order_code_format') ?? 'ORD-{YYYY}-{MM}-{DD}-{ID}' }}"
+                           class="form-control">
+                    <div
+                        class="form-text">{{ "Format for generating order codes. Use {YYYY}, {MM}, {DD}, {ID} as placeholders."|trans }}</div>
+                </td>
+            </tr>
+        {% endif %}
+
+        {% if has_setting('order_default_payment_method') %}
+            <tr>
+                <th class="settings-label">
+                    <label for="order_default_payment_method">{{ "Default Payment Method"|trans }}</label>
+                </th>
+                <td class="settings-input">
+                    <select name="order_default_payment_method" id="order_default_payment_method"
+                            class="form-select" style="max-width: 200px;">
+                        <option value="cash"
+                                {% if get_setting('order_default_payment_method') == 'cash' %}selected{% endif %}>{{ "Cash"|trans }}</option>
+                        <option value="card"
+                                {% if get_setting('order_default_payment_method') == 'card' %}selected{% endif %}>{{ "Card"|trans }}</option>
+                        <option value="check"
+                                {% if get_setting('order_default_payment_method') == 'check' %}selected{% endif %}>{{ "Check"|trans }}</option>
+                    </select>
+                    <div class="form-text">{{ "The default payment method for new orders."|trans }}</div>
+                </td>
+            </tr>
+        {% endif %}
+
+        <tr>
+            <th class="settings-label">{{ "Order Options"|trans }}</th>
+            <td class="settings-input">
+                {% if has_setting('order_is_active_ticket_model') %}
+                    <div class="form-check form-switch mb-2">
+                        <input class="form-check-input" type="checkbox" name="order_is_active_ticket_model"
+                               id="order_is_active_ticket_model" value="true"
+                               {% if get_setting('order_is_active_ticket_model') == 'true' %}checked{% endif %}>
+                        <label class="form-check-label" for="order_is_active_ticket_model">
+                            {{ "Enable ticket model"|trans }}
+                        </label>
+                    </div>
+                    <div class="form-text">{{ "Enable ticket model for orders."|trans }}</div>
                 {% endif %}
 
-                {% if has_setting('order_default_payment_method') %}
-                    <tr>
-                        <th class="settings-label">
-                            <label for="order_default_payment_method">{{ "Default Payment Method"|trans }}</label>
-                        </th>
-                        <td class="settings-input">
-                            <select name="order_default_payment_method" id="order_default_payment_method"
-                                    class="form-select" style="max-width: 200px;">
-                                <option value="cash"
-                                        {% if get_setting('order_default_payment_method') == 'cash' %}selected{% endif %}>{{ "Cash"|trans }}</option>
-                                <option value="card"
-                                        {% if get_setting('order_default_payment_method') == 'card' %}selected{% endif %}>{{ "Card"|trans }}</option>
-                                <option value="check"
-                                        {% if get_setting('order_default_payment_method') == 'check' %}selected{% endif %}>{{ "Check"|trans }}</option>
-                            </select>
-                            <div class="form-text">{{ "The default payment method for new orders."|trans }}</div>
-                        </td>
-                    </tr>
+                {% if has_setting('order_auto_print_receipt') %}
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="order_auto_print_receipt"
+                               id="order_auto_print_receipt" value="true"
+                               {% if get_setting('order_auto_print_receipt') == 'true' %}checked{% endif %}>
+                        <label class="form-check-label" for="order_auto_print_receipt">
+                            {{ "Auto-print receipts"|trans }}
+                        </label>
+                    </div>
+                    <div
+                        class="form-text">{{ "Automatically print receipt after order completion."|trans }}</div>
                 {% endif %}
-
-                <tr>
-                    <th class="settings-label">{{ "Order Options"|trans }}</th>
-                    <td class="settings-input">
-                        {% if has_setting('order_is_active_ticket_model') %}
-                            <div class="form-check form-switch mb-2">
-                                <input class="form-check-input" type="checkbox" name="order_is_active_ticket_model"
-                                       id="order_is_active_ticket_model" value="true"
-                                       {% if get_setting('order_is_active_ticket_model') == 'true' %}checked{% endif %}>
-                                <label class="form-check-label" for="order_is_active_ticket_model">
-                                    {{ "Enable ticket model"|trans }}
-                                </label>
-                            </div>
-                            <div class="form-text">{{ "Enable ticket model for orders."|trans }}</div>
-                        {% endif %}
-
-                        {% if has_setting('order_auto_print_receipt') %}
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" name="order_auto_print_receipt"
-                                       id="order_auto_print_receipt" value="true"
-                                       {% if get_setting('order_auto_print_receipt') == 'true' %}checked{% endif %}>
-                                <label class="form-check-label" for="order_auto_print_receipt">
-                                    {{ "Auto-print receipts"|trans }}
-                                </label>
-                            </div>
-                            <div
-                                class="form-text">{{ "Automatically print receipt after order completion."|trans }}</div>
-                        {% endif %}
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>

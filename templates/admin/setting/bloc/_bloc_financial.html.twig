@@ -1,102 +1,98 @@
-<div class="tab-pane fade" id="financial" role="tabpanel">
-    <div class="card">
-        <div class="card-body">
-            <table class="table table-borderless settings-table">
-                <tbody>
-                {% if has_setting('currency') %}
-                    <tr>
-                        <th class="settings-label">
-                            <label for="currency">{{ "Currency"|trans }}</label>
-                        </th>
-                        <td class="settings-input">
-                            <input name="currency" type="text" id="currency"
-                                   value="{{ get_setting('currency') }}" class="form-control"
-                                   style="max-width: 80px;">
-                            <div class="form-text">{{ "The currency code for your store."|trans }}</div>
-                        </td>
-                    </tr>
-                {% endif %}
+<div id="financial" class="tab-pane field-form_tab" role="tabpanel">
+    <table class="table table-borderless settings-table">
+        <tbody>
+        {% if has_setting('currency') %}
+            <tr>
+                <th class="settings-label">
+                    <label for="currency">{{ "Currency"|trans }}</label>
+                </th>
+                <td class="settings-input">
+                    <input name="currency" type="text" id="currency"
+                           value="{{ get_setting('currency') }}" class="form-control"
+                           style="max-width: 80px;">
+                    <div class="form-text">{{ "The currency code for your store."|trans }}</div>
+                </td>
+            </tr>
+        {% endif %}
 
-                {% if has_setting('currency_position') %}
-                    <tr>
-                        <th class="settings-label">{{ "Currency Position"|trans }}</th>
-                        <td class="settings-input">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="currency_position" value="before"
-                                       id="currency_before"
-                                       {% if get_setting('currency_position') == 'before' %}checked{% endif %}>
-                                <label class="form-check-label" for="currency_before">
-                                    {{ "Before amount"|trans }} ($100)
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="currency_position" value="after"
-                                       id="currency_after"
-                                       {% if get_setting('currency_position') == 'after' %}checked{% endif %}>
-                                <label class="form-check-label" for="currency_after">
-                                    {{ "After amount"|trans }} (100$)
-                                </label>
-                            </div>
-                        </td>
-                    </tr>
-                {% endif %}
+        {% if has_setting('currency_position') %}
+            <tr>
+                <th class="settings-label">{{ "Currency Position"|trans }}</th>
+                <td class="settings-input">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="currency_position" value="before"
+                               id="currency_before"
+                               {% if get_setting('currency_position') == 'before' %}checked{% endif %}>
+                        <label class="form-check-label" for="currency_before">
+                            {{ "Before amount"|trans }} ($100)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="currency_position" value="after"
+                               id="currency_after"
+                               {% if get_setting('currency_position') == 'after' %}checked{% endif %}>
+                        <label class="form-check-label" for="currency_after">
+                            {{ "After amount"|trans }} (100$)
+                        </label>
+                    </div>
+                </td>
+            </tr>
+        {% endif %}
 
-                {% if has_setting('decimals') %}
-                    <tr>
-                        <th class="settings-label">
-                            <label for="decimals">{{ "Number of Decimals"|trans }}</label>
-                        </th>
-                        <td class="settings-input">
-                            <input name="decimals" type="number" step="1" min="0" max="4" id="decimals"
-                                   value="{{ get_setting('decimals') }}" class="form-control"
-                                   style="max-width: 80px;">
-                            <div
-                                class="form-text">{{ "Number of decimal points shown in displayed prices."|trans }}</div>
-                        </td>
-                    </tr>
-                {% endif %}
+        {% if has_setting('decimals') %}
+            <tr>
+                <th class="settings-label">
+                    <label for="decimals">{{ "Number of Decimals"|trans }}</label>
+                </th>
+                <td class="settings-input">
+                    <input name="decimals" type="number" step="1" min="0" max="4" id="decimals"
+                           value="{{ get_setting('decimals') }}" class="form-control"
+                           style="max-width: 80px;">
+                    <div
+                        class="form-text">{{ "Number of decimal points shown in displayed prices."|trans }}</div>
+                </td>
+            </tr>
+        {% endif %}
 
-                {% if has_setting('decimal_separator') %}
-                    <tr>
-                        <th class="settings-label">
-                            <label for="decimal_separator">{{ "Decimal Separator"|trans }}</label>
-                        </th>
-                        <td class="settings-input">
-                            <select name="decimal_separator" id="decimal_separator" class="form-select"
-                                    style="max-width: 200px;">
-                                <option value="."
-                                        {% if get_setting('decimal_separator') == '.' %}selected{% endif %}>{{ "Period (.)"|trans }}</option>
-                                <option value=","
-                                        {% if get_setting('decimal_separator') == ',' %}selected{% endif %}>{{ "Comma (,)"|trans }}</option>
-                            </select>
-                            <div class="form-text">{{ "The decimal separator for displayed prices."|trans }}</div>
-                        </td>
-                    </tr>
-                {% endif %}
+        {% if has_setting('decimal_separator') %}
+            <tr>
+                <th class="settings-label">
+                    <label for="decimal_separator">{{ "Decimal Separator"|trans }}</label>
+                </th>
+                <td class="settings-input">
+                    <select name="decimal_separator" id="decimal_separator" class="form-select"
+                            style="max-width: 200px;">
+                        <option value="."
+                                {% if get_setting('decimal_separator') == '.' %}selected{% endif %}>{{ "Period (.)"|trans }}</option>
+                        <option value=","
+                                {% if get_setting('decimal_separator') == ',' %}selected{% endif %}>{{ "Comma (,)"|trans }}</option>
+                    </select>
+                    <div class="form-text">{{ "The decimal separator for displayed prices."|trans }}</div>
+                </td>
+            </tr>
+        {% endif %}
 
-                {% if has_setting('thousands_separator') %}
-                    <tr>
-                        <th class="settings-label">
-                            <label for="thousands_separator">{{ "Thousands Separator"|trans }}</label>
-                        </th>
-                        <td class="settings-input">
-                            <select name="thousands_separator" id="thousands_separator" class="form-select"
-                                    style="max-width: 200px;">
-                                <option value=","
-                                        {% if get_setting('thousands_separator') == ',' %}selected{% endif %}>{{ "Comma (,)"|trans }}</option>
-                                <option value=" "
-                                        {% if get_setting('thousands_separator') == ' ' %}selected{% endif %}>{{ "Space ( )"|trans }}</option>
-                                <option value="."
-                                        {% if get_setting('thousands_separator') == '.' %}selected{% endif %}>{{ "Period (.)"|trans }}</option>
-                                <option value=""
-                                        {% if get_setting('thousands_separator') == '' %}selected{% endif %}>{{ "None"|trans }}</option>
-                            </select>
-                            <div class="form-text">{{ "The thousands separator for displayed prices."|trans }}</div>
-                        </td>
-                    </tr>
-                {% endif %}
-                </tbody>
-            </table>
-        </div>
-    </div>
+        {% if has_setting('thousands_separator') %}
+            <tr>
+                <th class="settings-label">
+                    <label for="thousands_separator">{{ "Thousands Separator"|trans }}</label>
+                </th>
+                <td class="settings-input">
+                    <select name="thousands_separator" id="thousands_separator" class="form-select"
+                            style="max-width: 200px;">
+                        <option value=","
+                                {% if get_setting('thousands_separator') == ',' %}selected{% endif %}>{{ "Comma (,)"|trans }}</option>
+                        <option value=" "
+                                {% if get_setting('thousands_separator') == ' ' %}selected{% endif %}>{{ "Space ( )"|trans }}</option>
+                        <option value="."
+                                {% if get_setting('thousands_separator') == '.' %}selected{% endif %}>{{ "Period (.)"|trans }}</option>
+                        <option value=""
+                                {% if get_setting('thousands_separator') == '' %}selected{% endif %}>{{ "None"|trans }}</option>
+                    </select>
+                    <div class="form-text">{{ "The thousands separator for displayed prices."|trans }}</div>
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
 </div>

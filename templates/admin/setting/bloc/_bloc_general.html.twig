@@ -1,134 +1,130 @@
-<div class="tab-pane fade show active" id="general" role="tabpanel">
-    <div class="card">
-        <div class="card-body">
-            <table class="table table-borderless settings-table">
-                <tbody>
-                {% if has_setting('date_format') %}
-                    <tr>
-                        <th class="settings-label">
-                            <label for="date_format">{{ "Date Format"|trans }}</label>
-                        </th>
-                        <td class="settings-input">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="date_format" value="YYYY-MM-dd"
-                                       id="date_format_1"
-                                       {% if get_setting('date_format') == 'YYYY-MM-dd' %}checked{% endif %}>
-                                <label class="form-check-label" for="date_format_1">
-                                    <span class="format-example">{{ "now"|date('Y-m-d') }}</span>
-                                    <code>Y-m-d</code>
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="date_format" value="dd/MM/YYYY"
-                                       id="date_format_2"
-                                       {% if get_setting('date_format') == 'dd/MM/YYYY' %}checked{% endif %}>
-                                <label class="form-check-label" for="date_format_2">
-                                    <span class="format-example">{{ "now"|date('d/m/Y') }}</span>
-                                    <code>d/m/Y</code>
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="date_format" value="MM/dd/YYYY"
-                                       id="date_format_3"
-                                       {% if get_setting('date_format') == 'MM/dd/YYYY' %}checked{% endif %}>
-                                <label class="form-check-label" for="date_format_3">
-                                    <span class="format-example">{{ "now"|date('m/d/Y') }}</span>
-                                    <code>m/d/Y</code>
-                                </label>
-                            </div>
-                        </td>
-                    </tr>
-                {% endif %}
+<div id="general" class="tab-pane field-form_tab active show" role="tabpanel">
+    <table class="table table-borderless settings-table">
+        <tbody>
+        {% if has_setting('date_format') %}
+            <tr>
+                <th class="settings-label">
+                    <label for="date_format">{{ "Date Format"|trans }}</label>
+                </th>
+                <td class="settings-input">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="date_format" value="YYYY-MM-dd"
+                               id="date_format_1"
+                               {% if get_setting('date_format') == 'YYYY-MM-dd' %}checked{% endif %}>
+                        <label class="form-check-label" for="date_format_1">
+                            <span class="format-example">{{ "now"|date('Y-m-d') }}</span>
+                            <code>Y-m-d</code>
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="date_format" value="dd/MM/YYYY"
+                               id="date_format_2"
+                               {% if get_setting('date_format') == 'dd/MM/YYYY' %}checked{% endif %}>
+                        <label class="form-check-label" for="date_format_2">
+                            <span class="format-example">{{ "now"|date('d/m/Y') }}</span>
+                            <code>d/m/Y</code>
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="date_format" value="MM/dd/YYYY"
+                               id="date_format_3"
+                               {% if get_setting('date_format') == 'MM/dd/YYYY' %}checked{% endif %}>
+                        <label class="form-check-label" for="date_format_3">
+                            <span class="format-example">{{ "now"|date('m/d/Y') }}</span>
+                            <code>m/d/Y</code>
+                        </label>
+                    </div>
+                </td>
+            </tr>
+        {% endif %}
 
 
-                {% if has_setting('time_format') %}
-                    <tr>
-                        <th class="settings-label">
-                            <label for="time_format">{{ "Time Format"|trans }}</label>
-                        </th>
-                        <td class="settings-input">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="time_format" value="HH:mm:ss"
-                                       id="time_format_1"
-                                       {% if get_setting('time_format') == 'HH:mm:ss' %}checked{% endif %}>
-                                <label class="form-check-label" for="time_format_1">
-                                    <span class="format-example">{{ "now"|date('H:i:s') }}</span>
-                                    <code>H:i:s</code> (24-hour format)
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="time_format" value="HH:mm"
-                                       id="time_format_2"
-                                       {% if get_setting('time_format') == 'HH:mm' %}checked{% endif %}>
-                                <label class="form-check-label" for="time_format_2">
-                                    <span class="format-example">{{ "now"|date('H:i') }}</span>
-                                    <code>H:i</code>
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="time_format" value="hh:mm:ss"
-                                       id="time_format_3"
-                                       {% if get_setting('time_format') == 'hh:mm:ss' %}checked{% endif %}>
-                                <label class="form-check-label" for="time_format_3">
-                                    <span class="format-example">{{ "now"|date('h:i:s') }}</span>
-                                    <code>h:i:s</code> (12-hour format)
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="time_format" value="hh:mm"
-                                       id="time_format_4"
-                                       {% if get_setting('time_format') == 'hh:mm' %}checked{% endif %}>
-                                <label class="form-check-label" for="time_format_4">
-                                    <span class="format-example">{{ "now"|date('h:i') }}</span>
-                                    <code>h:i</code>
-                                </label>
-                            </div>
-                        </td>
-                    </tr>
-                {% endif %}
+        {% if has_setting('time_format') %}
+            <tr>
+                <th class="settings-label">
+                    <label for="time_format">{{ "Time Format"|trans }}</label>
+                </th>
+                <td class="settings-input">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="time_format" value="HH:mm:ss"
+                               id="time_format_1"
+                               {% if get_setting('time_format') == 'HH:mm:ss' %}checked{% endif %}>
+                        <label class="form-check-label" for="time_format_1">
+                            <span class="format-example">{{ "now"|date('H:i:s') }}</span>
+                            <code>H:i:s</code> (24-hour format)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="time_format" value="HH:mm"
+                               id="time_format_2"
+                               {% if get_setting('time_format') == 'HH:mm' %}checked{% endif %}>
+                        <label class="form-check-label" for="time_format_2">
+                            <span class="format-example">{{ "now"|date('H:i') }}</span>
+                            <code>H:i</code>
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="time_format" value="hh:mm:ss"
+                               id="time_format_3"
+                               {% if get_setting('time_format') == 'hh:mm:ss' %}checked{% endif %}>
+                        <label class="form-check-label" for="time_format_3">
+                            <span class="format-example">{{ "now"|date('h:i:s') }}</span>
+                            <code>h:i:s</code> (12-hour format)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="time_format" value="hh:mm"
+                               id="time_format_4"
+                               {% if get_setting('time_format') == 'hh:mm' %}checked{% endif %}>
+                        <label class="form-check-label" for="time_format_4">
+                            <span class="format-example">{{ "now"|date('h:i') }}</span>
+                            <code>h:i</code>
+                        </label>
+                    </div>
+                </td>
+            </tr>
+        {% endif %}
 
-                {% if has_setting('time_zone') %}
-                    <tr>
-                        <th class="settings-label">
-                            <label for="time_zone">{{ "Timezone"|trans }}</label>
-                        </th>
-                        <td class="settings-input">
-                            <select name="time_zone" id="time_zone" class="form-select" style="max-width: 200px;">
-                                <option value="Africa/Casablanca"
-                                        {% if get_setting('time_zone') == 'Africa/Casablanca' %}selected{% endif %}>
-                                    Casablanca
-                                </option>
-                                <option value="Europe/Paris"
-                                        {% if get_setting('time_zone') == 'Europe/Paris' %}selected{% endif %}>Paris
-                                </option>
-                            </select>
-                            <div class="form-text">{{ "Choose a timezone from the list."|trans }}</div>
-                        </td>
-                    </tr>
-                {% endif %}
+        {% if has_setting('time_zone') %}
+            <tr>
+                <th class="settings-label">
+                    <label for="time_zone">{{ "Timezone"|trans }}</label>
+                </th>
+                <td class="settings-input">
+                    <select name="time_zone" id="time_zone" class="form-select" style="max-width: 200px;">
+                        <option value="Africa/Casablanca"
+                                {% if get_setting('time_zone') == 'Africa/Casablanca' %}selected{% endif %}>
+                            Casablanca
+                        </option>
+                        <option value="Europe/Paris"
+                                {% if get_setting('time_zone') == 'Europe/Paris' %}selected{% endif %}>Paris
+                        </option>
+                    </select>
+                    <div class="form-text">{{ "Choose a timezone from the list."|trans }}</div>
+                </td>
+            </tr>
+        {% endif %}
 
-                {% if has_setting('language') %}
-                    <tr>
-                        <th class="settings-label">
-                            <label for="language">{{ "Site Language"|trans }}</label>
-                        </th>
-                        <td class="settings-input">
-                            <select name="language" id="language" class="form-select" style="max-width: 200px;">
-                                <option value="en" {% if get_setting('language') == 'en' %}selected{% endif %}>English
-                                </option>
-                                <option value="ar" {% if get_setting('language') == 'ar' %}selected{% endif %}>
-                                    العربية
-                                </option>
-                                <option value="fr" {% if get_setting('language') == 'fr' %}selected{% endif %}>
-                                    Français
-                                </option>
-                            </select>
-                            <div class="form-text">{{ "The site language for all users."|trans }}</div>
-                        </td>
-                    </tr>
-                {% endif %}
-                </tbody>
-            </table>
-        </div>
-    </div>
+        {% if has_setting('language') %}
+            <tr>
+                <th class="settings-label">
+                    <label for="language">{{ "Site Language"|trans }}</label>
+                </th>
+                <td class="settings-input">
+                    <select name="language" id="language" class="form-select" style="max-width: 200px;">
+                        <option value="en" {% if get_setting('language') == 'en' %}selected{% endif %}>English
+                        </option>
+                        <option value="ar" {% if get_setting('language') == 'ar' %}selected{% endif %}>
+                            العربية
+                        </option>
+                        <option value="fr" {% if get_setting('language') == 'fr' %}selected{% endif %}>
+                            Français
+                        </option>
+                    </select>
+                    <div class="form-text">{{ "The site language for all users."|trans }}</div>
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
 </div>

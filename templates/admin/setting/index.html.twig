@@ -5,51 +5,56 @@
 {% block content_title "Settings" %}
 
 {% block main %}
-    <div class="container-fluid">
-        <form action="{{ path('admin_setting') }}" method="post">
-            <!-- WordPress Style Tabs -->
-            <div class="settings-tabs mb-3">
-                <ul class="nav nav-tabs nav-tabs-wordpress" id="settingsTabs" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab">
-                            {{ ux_icon('tabler:settings') }}
-                            {{ "General"|trans }}
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="company-tab" data-bs-toggle="tab" data-bs-target="#company" type="button" role="tab">
-                            {{ ux_icon('tabler:building') }}
-                            {{ "Company"|trans }}
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="financial-tab" data-bs-toggle="tab" data-bs-target="#financial" type="button" role="tab">
-                            {{ ux_icon('tabler:currency-dollar') }}
-                            {{ "Financial"|trans }}
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="orders-tab" data-bs-toggle="tab" data-bs-target="#orders" type="button" role="tab">
-                            {{ ux_icon('tabler:shopping-cart') }}
-                            {{ "Orders"|trans }}
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="receipts-tab" data-bs-toggle="tab" data-bs-target="#receipts" type="button" role="tab">
-                            {{ ux_icon('tabler:receipt-2') }}
-                            {{ "Receipts"|trans }}
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="products-tab" data-bs-toggle="tab" data-bs-target="#products" type="button" role="tab">
-                            {{ ux_icon('tabler:box') }}
-                            {{ "Products"|trans }}
-                        </button>
-                    </li>
-                </ul>
-            </div>
+    <form action="{{ path('admin_setting') }}" method="post">
+        <div class="nav-tabs-custom form-tabs-tablist">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" href="#general" id="general-tab" data-bs-toggle="tab" aria-selected="true"
+                       role="tab">
+                        {{ ux_icon('tabler:settings') }}
+                        {{ "General"|trans }}
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" href="#company" id="company-tab" data-bs-toggle="tab"
+                       aria-selected="false" role="tab" tabindex="-1">
+                        {{ ux_icon('tabler:building') }}
+                        {{ "Company"|trans }}
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" href="#financial" id="financial-tab" data-bs-toggle="tab" aria-selected="false" role="tab"
+                       tabindex="-1">
+                        {{ ux_icon('tabler:currency-dollar') }}
+                        {{ "Financial"|trans }}
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" href="#orders" id="orders-tab" data-bs-toggle="tab" aria-selected="false" role="tab"
+                       tabindex="-1">
+                        {{ ux_icon('tabler:shopping-cart') }}
+                        {{ "Orders"|trans }}
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" href="#receipts" id="receipts-tab" data-bs-toggle="tab" aria-selected="false" role="tab"
+                       tabindex="-1">
+                        {{ ux_icon('tabler:receipt-2') }}
+                        {{ "Receipts"|trans }}
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" href="#products" id="products-tab" data-bs-toggle="tab" aria-selected="false" role="tab"
+                       tabindex="-1">
+                        {{ ux_icon('tabler:box') }}
+                        {{ "Products"|trans }}
+                    </a>
+                </li>
+            </ul>
+        </div>
 
-            <div class="tab-content" id="settingsTabContent">
+        <div class="nav-tabs-custom form-tabs-content">
+            <div class="tab-content">
                 <!-- General Settings Tab -->
                 {% include 'admin/setting/bloc/_bloc_general.html.twig' %}
 
@@ -76,431 +81,415 @@
                     {{ "Save Changes"|trans }}
                 </button>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
 
     <style>
-    /* WordPress-style tabs with Bootstrap */
-    .nav-tabs-wordpress {
-        border-bottom: 1px solid #c3c4c7;
-        margin-bottom: 0;
-        overflow-x: auto;
-        overflow-y: hidden;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-    }
-
-    .nav-tabs-wordpress::-webkit-scrollbar {
-        display: none;
-    }
-
-    .nav-tabs-wordpress .nav-item {
-        flex-shrink: 0;
-    }
-
-    .nav-tabs-wordpress .nav-link {
-        border: 1px solid #c3c4c7;
-        border-bottom: none;
-        color: #646970;
-        background: #f6f7f7;
-        font-size: 12px;
-        font-weight: 600;
-        text-transform: uppercase;
-        padding: 8px 14px;
-        margin-right: 2px;
-        border-radius: 0;
-        white-space: nowrap;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        min-width: fit-content;
-        transition: all 0.2s ease;
-    }
-
-    .nav-tabs-wordpress .nav-link:hover {
-        background-color: #fff;
-        color: #3c434a;
-        border-color: #c3c4c7;
-        transform: translateY(-1px);
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .nav-tabs-wordpress .nav-link.active {
-        background-color: #fff;
-        color: #1d2327;
-        border-bottom: 1px solid #fff;
-        margin-bottom: -1px;
-        box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
-    }
-
-    .nav-tabs-wordpress .nav-link svg {
-        width: 16px;
-        height: 16px;
-        flex-shrink: 0;
-    }
-
-    /* Settings table styling */
-    .settings-table {
-        margin-bottom: 0;
-        width: 100%;
-    }
-
-    .settings-table th.settings-label {
-        width: 200px;
-        font-weight: 600;
-        color: #1d2327;
-        vertical-align: top;
-        padding: 20px 20px 20px 0;
-        border-bottom: 1px solid #f0f0f1;
-        min-width: 150px;
-    }
-
-    .settings-table td.settings-input {
-        padding: 15px 10px;
-        vertical-align: top;
-        border-bottom: 1px solid #f0f0f1;
-        width: 100%;
-    }
-
-    .settings-table .form-text {
-        color: #646970;
-        font-size: 13px;
-        font-style: italic;
-        margin-top: 5px;
-        line-height: 1.4;
-    }
-
-    /* Format examples */
-    .format-example {
-        font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-        background: #f8f9fa;
-        padding: 2px 6px;
-        border-radius: 3px;
-        margin-right: 10px;
-        font-size: 13px;
-        white-space: nowrap;
-    }
-
-    code {
-        color: #d63384;
-        background-color: #f8f9fa;
-        padding: 2px 4px;
-        border-radius: 3px;
-        font-size: 87.5%;
-        white-space: nowrap;
-    }
-
-    /* Tab content styling */
-    .tab-content .card {
-        border: 1px solid #c3c4c7;
-        border-top: none;
-        border-radius: 0 0 4px 4px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-
-    .tab-content .card-body {
-        padding: 1.5rem;
-    }
-
-    /* Form controls responsive sizing */
-    .form-control, .form-select {
-        transition: all 0.2s ease;
-    }
-
-    .form-control:focus, .form-select:focus {
-        box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
-        transform: scale(1.02);
-    }
-
-    /* Form switches */
-    .form-check-input:checked {
-        background-color: #0d6efd;
-        border-color: #0d6efd;
-    }
-
-    .form-check-label {
-        cursor: pointer;
-        user-select: none;
-    }
-
-    /* Save button improvements */
-    .btn-lg {
-        padding: 0.75rem 1.5rem;
-        font-size: 1.1rem;
-        border-radius: 0.5rem;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .btn-lg:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-
-    /* Container improvements */
-    .container-fluid {
-        max-width: 1400px;
-        margin: 0 auto;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-
-    /* Loading states and animations */
-    .settings-table tr {
-        transition: background-color 0.2s ease;
-    }
-
-    .settings-table tr:hover {
-        background-color: rgba(0,0,0,0.02);
-    }
-
-    /* Responsive breakpoints */
-
-    /* Extra small devices (phones, less than 576px) */
-    @media (max-width: 575.98px) {
-        .container-fluid {
-            padding-left: 0.5rem;
-            padding-right: 0.5rem;
-        }
-
-        .nav-tabs-wordpress {
-            margin-left: -0.5rem;
-            margin-right: -0.5rem;
-            padding-left: 0.5rem;
-            padding-right: 0.5rem;
+        .nav-tabs-wordpress .nav-item {
+            flex-shrink: 0;
         }
 
         .nav-tabs-wordpress .nav-link {
-            font-size: 10px;
-            padding: 6px 8px;
-            margin-right: 1px;
+            border: 1px solid #c3c4c7;
+            border-bottom: none;
+            color: #646970;
+            background: #f6f7f7;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 8px 14px;
+            margin-right: 2px;
+            border-radius: 0;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            min-width: fit-content;
+            transition: all 0.2s ease;
+        }
+
+        .nav-tabs-wordpress .nav-link:hover {
+            background-color: #fff;
+            color: #3c434a;
+            border-color: #c3c4c7;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-tabs-wordpress .nav-link.active {
+            background-color: #fff;
+            color: #1d2327;
+            border-bottom: 1px solid #fff;
+            margin-bottom: -1px;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .nav-tabs-wordpress .nav-link svg {
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
         }
 
+        /* Settings table styling */
         .settings-table {
-            font-size: 14px;
-        }
-
-        .settings-table th.settings-label,
-        .settings-table td.settings-input {
-            display: block;
+            margin-bottom: 0;
             width: 100%;
-            padding: 10px 8px;
-            border-bottom: 1px solid #f0f0f1;
         }
 
         .settings-table th.settings-label {
-            padding-bottom: 5px;
-            font-size: 14px;
+            width: 200px;
             font-weight: 600;
             color: #1d2327;
+            vertical-align: top;
+            padding: 20px 20px 20px 0;
+            border-bottom: 1px solid #f0f0f1;
+            min-width: 150px;
         }
 
         .settings-table td.settings-input {
-            padding-top: 0;
-        }
-
-        .form-control, .form-select {
-            font-size: 16px; /* Prevents zoom on iOS */
-        }
-
-        .format-example {
-            font-size: 11px;
-            margin-right: 5px;
-            margin-bottom: 3px;
-            display: inline-block;
-        }
-
-        .form-check {
-            margin-bottom: 0.75rem;
-        }
-
-        .btn-lg {
+            padding: 15px 10px;
+            vertical-align: top;
+            border-bottom: 1px solid #f0f0f1;
             width: 100%;
-            padding: 0.75rem;
-            font-size: 1rem;
+        }
+
+        .settings-table .form-text {
+            color: #646970;
+            font-size: 13px;
+            font-style: italic;
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+
+        /* Format examples */
+        .format-example {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-right: 10px;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        code {
+            color: #d63384;
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-size: 87.5%;
+            white-space: nowrap;
+        }
+
+        /* Tab content styling */
+        .tab-content .card {
+            border: 1px solid #c3c4c7;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .tab-content .card-body {
-            padding: 1rem;
+            padding: 1.5rem;
         }
 
-        .d-flex.justify-content-end {
-            justify-content: stretch !important;
-        }
-    }
-
-    /* Small devices (landscape phones, 576px and up) */
-    @media (min-width: 576px) and (max-width: 767.98px) {
-        .nav-tabs-wordpress .nav-link {
-            font-size: 11px;
-            padding: 6px 10px;
-        }
-
-        .nav-tabs-wordpress .nav-link svg {
-            width: 15px;
-            height: 15px;
-        }
-
-        .settings-table th.settings-label {
-            width: 180px;
-            font-size: 14px;
-        }
-
-        .settings-table td.settings-input {
-            font-size: 14px;
-        }
-
+        /* Form controls responsive sizing */
         .form-control, .form-select {
-            font-size: 15px;
+            transition: all 0.2s ease;
         }
 
+        .form-control:focus, .form-select:focus {
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+            transform: scale(1.02);
+        }
+
+        /* Form switches */
+        .form-check-input:checked {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+        }
+
+        .form-check-label {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* Save button improvements */
         .btn-lg {
-            padding: 0.7rem 1.3rem;
-            font-size: 1rem;
-        }
-    }
-
-    /* Medium devices (tablets, 768px and up) */
-    @media (min-width: 768px) and (max-width: 991.98px) {
-        .settings-table th.settings-label {
-            width: 200px;
+            padding: 0.75rem 1.5rem;
+            font-size: 1.1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .nav-tabs-wordpress .nav-link {
-            font-size: 11px;
-            padding: 7px 12px;
+        .btn-lg:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
+        /* Container improvements */
         .container-fluid {
+            max-width: 1400px;
+            margin: 0 auto;
             padding-left: 1rem;
             padding-right: 1rem;
         }
 
-        .tab-content .card-body {
-            padding: 1.25rem;
-        }
-    }
-
-    /* Large devices (desktops, 992px and up) */
-    @media (min-width: 992px) and (max-width: 1199.98px) {
-        .settings-table th.settings-label {
-            width: 220px;
-        }
-
-        .nav-tabs-wordpress .nav-link {
-            font-size: 12px;
-            padding: 8px 14px;
-        }
-
-        .container-fluid {
-            max-width: 1140px;
-        }
-    }
-
-    /* Extra large devices (large desktops, 1200px and up) */
-    @media (min-width: 1200px) {
-        .settings-table th.settings-label {
-            width: 250px;
-        }
-
-        .nav-tabs-wordpress .nav-link {
-            font-size: 12px;
-            padding: 8px 16px;
-        }
-
-        .container-fluid {
-            max-width: 1320px;
-        }
-
-        .tab-content .card-body {
-            padding: 2rem;
-        }
-    }
-
-    /* Ultra wide screens (1400px and up) */
-    @media (min-width: 1400px) {
-        .container-fluid {
-            max-width: 1400px;
-        }
-
-        .settings-table th.settings-label {
-            width: 280px;
-        }
-
-        .nav-tabs-wordpress .nav-link {
-            font-size: 13px;
-            padding: 10px 18px;
-        }
-    }
-
-    /* Print styles */
-    @media print {
-        .nav-tabs-wordpress,
-        .btn-lg,
-        .d-flex.justify-content-end {
-            display: none !important;
-        }
-
-        .tab-content .card {
-            border: none;
-            box-shadow: none;
-        }
-
-        .settings-table {
-            break-inside: avoid;
-        }
-
-        .settings-table th.settings-label,
-        .settings-table td.settings-input {
-            padding: 8px 4px;
-            font-size: 12px;
-        }
-    }
-
-    /* High contrast mode support */
-    @media (prefers-contrast: high) {
-        .nav-tabs-wordpress .nav-link {
-            border-width: 2px;
-        }
-
-        .settings-table th.settings-label {
-            border-bottom-width: 2px;
-        }
-
-        .form-control, .form-select {
-            border-width: 2px;
-        }
-    }
-
-    /* Reduced motion support */
-    @media (prefers-reduced-motion: reduce) {
-        .nav-tabs-wordpress .nav-link,
-        .form-control,
-        .form-select,
-        .btn-lg,
+        /* Loading states and animations */
         .settings-table tr {
-            transition: none;
+            transition: background-color 0.2s ease;
         }
 
-        .nav-tabs-wordpress .nav-link:hover,
-        .btn-lg:hover {
-            transform: none;
+        .settings-table tr:hover {
+            background-color: rgba(0, 0, 0, 0.02);
         }
-    }
 
-    /* Dark mode support (if needed) */
-    @media (prefers-color-scheme: dark) {
-        :root {
-            --bs-body-bg: #1a1a1a;
-            --bs-body-color: #e9ecef;
+        /* Responsive breakpoints */
+
+        /* Extra small devices (phones, less than 576px) */
+        @media (max-width: 575.98px) {
+            .container-fluid {
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+
+            .nav-tabs-wordpress {
+                margin-left: -0.5rem;
+                margin-right: -0.5rem;
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+
+            .nav-tabs-wordpress .nav-link {
+                font-size: 10px;
+                padding: 6px 8px;
+                margin-right: 1px;
+            }
+
+            .nav-tabs-wordpress .nav-link svg {
+                width: 14px;
+                height: 14px;
+            }
+
+            .settings-table {
+                font-size: 14px;
+            }
+
+            .settings-table th.settings-label,
+            .settings-table td.settings-input {
+                display: block;
+                width: 100%;
+                padding: 10px 8px;
+                border-bottom: 1px solid #f0f0f1;
+            }
+
+            .settings-table th.settings-label {
+                padding-bottom: 5px;
+                font-size: 14px;
+                font-weight: 600;
+                color: #1d2327;
+            }
+
+            .settings-table td.settings-input {
+                padding-top: 0;
+            }
+
+            .form-control, .form-select {
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+
+            .format-example {
+                font-size: 11px;
+                margin-right: 5px;
+                margin-bottom: 3px;
+                display: inline-block;
+            }
+
+            .form-check {
+                margin-bottom: 0.75rem;
+            }
+
+            .btn-lg {
+                width: 100%;
+                padding: 0.75rem;
+                font-size: 1rem;
+            }
+
+            .tab-content .card-body {
+                padding: 1rem;
+            }
+
+            .d-flex.justify-content-end {
+                justify-content: stretch !important;
+            }
         }
-    }
+
+        /* Small devices (landscape phones, 576px and up) */
+        @media (min-width: 576px) and (max-width: 767.98px) {
+            .nav-tabs-wordpress .nav-link {
+                font-size: 11px;
+                padding: 6px 10px;
+            }
+
+            .nav-tabs-wordpress .nav-link svg {
+                width: 15px;
+                height: 15px;
+            }
+
+            .settings-table th.settings-label {
+                width: 180px;
+                font-size: 14px;
+            }
+
+            .settings-table td.settings-input {
+                font-size: 14px;
+            }
+
+            .form-control, .form-select {
+                font-size: 15px;
+            }
+
+            .btn-lg {
+                padding: 0.7rem 1.3rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Medium devices (tablets, 768px and up) */
+        @media (min-width: 768px) and (max-width: 991.98px) {
+            .settings-table th.settings-label {
+                width: 200px;
+            }
+
+            .nav-tabs-wordpress .nav-link {
+                font-size: 11px;
+                padding: 7px 12px;
+            }
+
+            .container-fluid {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .tab-content .card-body {
+                padding: 1.25rem;
+            }
+        }
+
+        /* Large devices (desktops, 992px and up) */
+        @media (min-width: 992px) and (max-width: 1199.98px) {
+            .settings-table th.settings-label {
+                width: 220px;
+            }
+
+            .nav-tabs-wordpress .nav-link {
+                font-size: 12px;
+                padding: 8px 14px;
+            }
+
+            .container-fluid {
+                max-width: 1140px;
+            }
+        }
+
+        /* Extra large devices (large desktops, 1200px and up) */
+        @media (min-width: 1200px) {
+            .settings-table th.settings-label {
+                width: 250px;
+            }
+
+            .nav-tabs-wordpress .nav-link {
+                font-size: 12px;
+                padding: 8px 16px;
+            }
+
+            .container-fluid {
+                max-width: 1320px;
+            }
+
+            .tab-content .card-body {
+                padding: 2rem;
+            }
+        }
+
+        /* Ultra wide screens (1400px and up) */
+        @media (min-width: 1400px) {
+            .container-fluid {
+                max-width: 1400px;
+            }
+
+            .settings-table th.settings-label {
+                width: 280px;
+            }
+
+            .nav-tabs-wordpress .nav-link {
+                font-size: 13px;
+                padding: 10px 18px;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .nav-tabs-wordpress,
+            .btn-lg,
+            .d-flex.justify-content-end {
+                display: none !important;
+            }
+
+            .tab-content .card {
+                border: none;
+                box-shadow: none;
+            }
+
+            .settings-table {
+                break-inside: avoid;
+            }
+
+            .settings-table th.settings-label,
+            .settings-table td.settings-input {
+                padding: 8px 4px;
+                font-size: 12px;
+            }
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .nav-tabs-wordpress .nav-link {
+                border-width: 2px;
+            }
+
+            .settings-table th.settings-label {
+                border-bottom-width: 2px;
+            }
+
+            .form-control, .form-select {
+                border-width: 2px;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            .nav-tabs-wordpress .nav-link,
+            .form-control,
+            .form-select,
+            .btn-lg,
+            .settings-table tr {
+                transition: none;
+            }
+
+            .nav-tabs-wordpress .nav-link:hover,
+            .btn-lg:hover {
+                transform: none;
+            }
+        }
+
+        /* Dark mode support (if needed) */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bs-body-bg: #1a1a1a;
+                --bs-body-color: #e9ecef;
+            }
+        }
     </style>
 {% endblock %}
