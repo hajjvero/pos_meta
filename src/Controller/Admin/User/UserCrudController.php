@@ -3,7 +3,6 @@
 namespace App\Controller\Admin\User;
 
 use App\Entity\User\User;
-use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
@@ -50,10 +49,10 @@ class UserCrudController extends AbstractCrudController
         yield TelephoneField::new('phone', t('Phone'));
 
         yield ChoiceField::new('roles', t('Roles'))
-            ->setChoices([
-                'User' => 'ROLE_USER',
-                'Admin' => 'ROLE_ADMIN',
-                'Super Admin' => 'ROLE_SUPER_ADMIN',
+            ->setTranslatableChoices([
+                'ROLE_USER' => t('User'),
+                'ROLE_ADMIN' => t('Admin'),
+                'ROLE_SUPER_ADMIN' => t('Super Admin')
             ])
             ->allowMultipleChoices()
             ->renderAsBadges([
@@ -110,23 +109,20 @@ class UserCrudController extends AbstractCrudController
     public function createNewForm(EntityDto $entityDto, KeyValueStore $formOptions, AdminContext $context): FormInterface
     {
         return parent::createNewFormBuilder($entityDto, $formOptions, $context)
-            ->addEventListener(FormEvents::POST_SUBMIT, $this->hashPassword(...))
+            ->addEventListener(FormEvents::SUBMIT, $this->hashPassword(...))
             ->getForm();
     }
 
     public function createEditForm(EntityDto $entityDto, KeyValueStore $formOptions, AdminContext $context): FormInterface
     {
         return parent::createEditFormBuilder($entityDto, $formOptions, $context)
-            ->addEventListener(FormEvents::POST_SUBMIT, $this->hashPassword(...))
+            ->addEventListener(FormEvents::SUBMIT, $this->hashPassword(...))
             ->getForm();
     }
 
     private function hashPassword($event): void
     {
         $form = $event->getForm();
-        if (!$form->isValid()) {
-            return;
-        }
 
         $plainPassword = $form->get('plainPassword')->getData();
         if (empty($plainPassword)) {

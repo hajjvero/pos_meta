@@ -46,6 +46,7 @@ class User extends Person implements UserInterface, PasswordAuthenticatedUserInt
     /**
      * @var ?string The hashed password
      */
+    #[Assert\NotBlank]
     #[Assert\Length(
         min: 8,
         minMessage: 'Password must be at least {{ limit }} characters long'
