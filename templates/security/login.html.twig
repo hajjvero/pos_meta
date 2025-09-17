@@ -1,0 +1,42 @@
+{% extends 'security/layout.html.twig' %}
+
+{% block main %}
+    <form method="post">
+        <div class="form-floating mb-3">
+            <input type="text" name="_username" class="form-control form-control-lg" id="username" placeholder="name@example.com" required autofocus>
+            <label for="username">
+                {{ ux_icon('bi:envelope', { 'class': 'me-1'}) }}
+                Email address / Pseudonym
+            </label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="password" name="_password" class="form-control form-control-lg" id="password" placeholder="Password" required>
+            <label for="password">
+                {{ ux_icon('bi:lock', { 'class': 'me-1'}) }}
+                Password
+            </label>
+        </div>
+
+        <div class="mb-3 d-flex justify-content-between align-items-center">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="_remember_me"  id="rememberMe" >
+                <label class="form-check-label" for="rememberMe">
+                    Remember me
+                </label>
+            </div>
+            <a href="#" class="text-decoration-none small">
+                Forgot password?
+            </a>
+        </div>
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-lg">
+                {{ ux_icon('bi:box-arrow-in-right', { 'class': 'me-2'}) }}
+                Sign In
+            </button>
+        </div>
+    </form>
+{% endblock %}

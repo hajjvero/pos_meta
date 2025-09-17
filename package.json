@@ -27,6 +27,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "bootstrap": "^5.2.3",
         "imask": "^7.6.1"
     }
 }

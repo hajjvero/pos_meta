@@ -293,7 +293,7 @@ class User extends Person implements UserInterface, PasswordAuthenticatedUserInt
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->username;
+        return (string) ($this->username ?: $this->email);
     }
 
     /**
